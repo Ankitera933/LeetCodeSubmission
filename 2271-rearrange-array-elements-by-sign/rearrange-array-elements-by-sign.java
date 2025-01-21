@@ -1,36 +1,30 @@
 class Solution {
     public int[] rearrangeArray(int[] nums) {
         int n=nums.length;
-        int []temp=new int[n/2];
-        int []temp2=new int[n/2];
-        int []temp3=new int[n];
-        int posetive=0;
-        int negative=0;
+        ArrayList<Integer>Posetive=new ArrayList<>();
+        ArrayList<Integer>Negative=new ArrayList<>();
         for(int i=0;i<n;i++){
             if(nums[i]>0){
-                temp[posetive]=nums[i];
-                posetive++;
+                Posetive.add(nums[i]);
             }
             else{
-                temp2[negative]=nums[i];
-                negative++;
+                Negative.add(nums[i]);
             }
-
-
         }
-        posetive=0;
-        negative=0;
+        int []result=new int[n];
+        int pos=0;
+        int neg=0;
         for(int i=0;i<n;i++){
             if(i%2==0){
-                temp3[i]=temp[posetive];
-                posetive++;
+                result[i]=Posetive.get(pos);
+                pos++;
             }
             else{
-                temp3[i]=temp2[negative];
-                negative++;
+                result[i]=Negative.get(neg);
+                neg++;
             }
         }
-            System.arraycopy(temp3,0,nums,0,n);
+        System.arraycopy(result,0,nums,0,n);
         return nums;
     }
 }
