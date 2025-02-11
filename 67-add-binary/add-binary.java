@@ -1,25 +1,21 @@
-import java.math.BigInteger;
+class Solution 
+{
+  public String addBinary(String a, String b) 
+  {
+    StringBuilder sb = new StringBuilder();
+    int carry = 0;
+    int i = a.length() - 1;
+    int j = b.length() - 1;
 
-class Solution {
-    public String addBinary(String a, String b) {
-        // Convert binary strings to BigInteger
-        BigInteger dec1 = BinaryToDecimal(a);
-        BigInteger dec2 = BinaryToDecimal(b);
-        
-        // Add the two BigInteger values
-        BigInteger result = dec1.add(dec2);
-        
-        // Convert the result back to binary and return it
-        return DecimalToBinary(result);
+    while (i >= 0 || j >= 0 || carry == 1) 
+    {
+      if(i >= 0)
+        carry += a.charAt(i--) - '0';
+      if(j >= 0)
+        carry += b.charAt(j--) - '0';
+      sb.append(carry % 2);
+      carry /= 2;
     }
-
-    // Convert binary string to BigInteger
-    private static BigInteger BinaryToDecimal(String a) {
-        return new BigInteger(a, 2);  // Base 2 indicates it's a binary string
-    }
-
-    // Convert BigInteger to binary string
-    private static String DecimalToBinary(BigInteger a) {
-        return a.toString(2);  // Convert to binary representation
-    }
+    return sb.reverse().toString();
+  }
 }
