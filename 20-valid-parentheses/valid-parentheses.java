@@ -1,12 +1,22 @@
 class Solution {
     public boolean isValid(String s) {
-        // Continue until there are no more valid pairs to remove
-        while (s.contains("()") || s.contains("[]") || s.contains("{}")) {
-            // Remove the matching pairs
-            s = s.replace("()", "").replace("[]", "").replace("{}", "");
+        Stack<Character>stack=new Stack<>();
+        for(int i=0;i<s.length();i++){
+            char c=s.charAt(i);
+            if(c=='('){
+                stack.push(')');
+            }
+            else if(c=='{'){
+                stack.push('}');
+            }
+            else if(c=='['){
+                stack.push(']');
+            }
+            else if(stack.isEmpty() || stack.pop()!=c){
+                return false;
+            }
+            
         }
-        
-        // If the string is empty, all brackets have been removed and it's valid
-        return s.isEmpty();
+        return stack.isEmpty();
     }
 }
