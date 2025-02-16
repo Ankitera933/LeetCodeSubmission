@@ -1,22 +1,26 @@
 class Solution {
     public String removeOuterParentheses(String s) {
-        StringBuilder result = new StringBuilder();
-        int balance = 0; // To track the depth of parentheses
-
-        for (char c : s.toCharArray()) {
-            if (c == '(') {
-                if (balance > 0) { // Ignore the outermost '('
-                    result.append(c);
-                }
-                balance++; // Increase balance count
-            } else { // c == ')'
-                balance--; // Decrease balance count
-                if (balance > 0) { // Ignore the outermost ')'
-                    result.append(c);
-                }
-            }
+      int len=s.length();
+      StringBuilder result=new StringBuilder();
+      int index=0;
+      for(int i=0;i<s.length();i++){
+        char c=s.charAt(i);
+        
+        if(c=='('){
+            if(index>0){
+            result.append(c);
+            
         }
+        index++;
+        }
+        else{
+            index--;
+            if(index>0){
+                result.append(c);
+            }
 
-        return result.toString();
+        }
+      }
+      return result.toString();
     }
 }
