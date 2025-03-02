@@ -1,43 +1,39 @@
 class Solution {
     public String longestPalindrome(String s) {
-
-        if(s.length()==1){
-            return s;
+        // If the input string is empty or has a single character, return it directly
+        if (s == null || s.length() < 1) {
+            return "";
         }
-        if(s.length()==2){
-            if(s.charAt(0)==s.charAt(1)){
-            return s;
+        
+        String longest = "";
+        
+        // Loop through each character and treat it as the center of a potential palindrome
+        for (int i = 0; i < s.length(); i++) {
+            // Check for odd-length palindromes (single character center)
+            String oddPalindrome = expandAroundCenter(s, i, i);
+            if (oddPalindrome.length() > longest.length()) {
+                longest = oddPalindrome;
             }
-            else{
-                
-                return String.valueOf(s.charAt(0));
-            }
-        }
 
-        String longest="";
-
-        for(int i=0;i<s.length();i++){
-            for(int j=i+1;j<=s.length();j++){
-                    String str=s.substring(i,j);
-
-                    if(isPalindrome(str)&& str.length()>longest.length()){
-                        longest=str;
-                    }
+            // Check for even-length palindromes (two character center)
+            String evenPalindrome = expandAroundCenter(s, i, i + 1);
+            if (evenPalindrome.length() > longest.length()) {
+                longest = evenPalindrome;
             }
         }
+
         return longest;
-    
     }
-    public static boolean isPalindrome(String s){
-        int left=0;
-        int right=s.length()-1;
-        while(left<right){
-            if(s.charAt(left)!=s.charAt(right)){
-                return false;
-            }
-            left++;
-            right--;
+
+    // Helper method to expand around the center and return the longest palindrome
+    private String expandAroundCenter(String s, int left, int right) {
+        // Expand as long as the characters at the left and right pointers match
+        while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+            left--;
+            right++;
         }
-        return true;
+        
+      
+        return s.substring(left + 1, right);
     }
 }
