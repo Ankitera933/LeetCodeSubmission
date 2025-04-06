@@ -1,21 +1,17 @@
 class Solution {
     public int removeDuplicates(int[] nums) {
-        int count1=0;
-        int insert=0;
+        if (nums.length <= 2) return nums.length;
 
-        HashMap<Integer,Integer>Map=new HashMap<>();
+        int insertPos = 2;
 
-        for(int i=0;i<nums.length;i++){
-            int num=nums[i];
-            int count=Map.getOrDefault(num,0);
-            if(count<2){
-                nums[insert]=nums[i];
-                insert++;
-                Map.put(num,count+1);
-                
+        for (int i = 2; i < nums.length; i++) {
+            // Compare current element with the element two positions back
+            if (nums[i] != nums[insertPos - 2]) {
+                nums[insertPos] = nums[i];
+                insertPos++;
             }
         }
 
-        return insert;
+        return insertPos;
     }
 }
