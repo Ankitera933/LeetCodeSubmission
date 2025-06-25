@@ -1,22 +1,19 @@
 class Solution {
     public int numberOfSubarrays(int[] nums, int k) {
-        int n=nums.length, left=0, right = 0 , prefix=0 , res=0;
-        
-        while(right<n){
-            if(nums[right]%2==1){
-                prefix=0;
-                k--;
-            }
-            while(k==0)
-            {
-                k=nums[left]%2;
-                left++;
-                prefix++;
+        int n = nums.length; // Get the length of the input array
+        HashMap<Integer, Integer> mpp = new HashMap<>(); // Initialize hashmap to store prefix sums
+        int sum = 0; // Initialize sum to count odd numbers
+        int ans = 0; // Initialize answer to count subarrays with exactly 'k' odd numbers
+        mpp.put(0, 1); // Initialize hashmap with 0 sum to handle cases where subarray starts from index 0
 
+        for (int i = 0; i < n; i++) { // Iterate through the array
+            if (nums[i] % 2 == 1) { // Check if the current number is odd
+                sum += 1; // Increment the sum if the number is odd
             }
-            res+=prefix;
-            right++;
+            int diff = sum - k; // Calculate the difference needed to form a subarray with 'k' odd numbers
+            ans += mpp.getOrDefault(diff, 0); // Add the count of subarrays found with the required difference
+            mpp.put(sum, mpp.getOrDefault(sum, 0) + 1); // Update the hashmap with the current sum
         }
-        return res;
+        return ans; // Return the total count of subarrays with exactly 'k' odd numbers
     }
 }
