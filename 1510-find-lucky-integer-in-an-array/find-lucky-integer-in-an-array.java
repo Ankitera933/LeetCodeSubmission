@@ -1,19 +1,18 @@
 class Solution {
     public int findLucky(int[] arr) {
-        int[] freq = new int[501]; // Since 1 <= arr[i] <= 500
-
-        // Count frequency of each number
-        for (int num : arr) {
-            freq[num]++;
+        HashMap<Integer,Integer>map=new HashMap<>();
+        for(int i=0;i<arr.length;i++){
+            map.put(arr[i],map.getOrDefault(arr[i],0)+1);
         }
-
-        // Check from largest to smallest
-        for (int i = 500; i >= 1; i--) {
-            if (freq[i] == i) {
-                return i;
+        int maxLength=-1;
+        for(Map.Entry<Integer,Integer>entry:map.entrySet()){
+            int key=entry.getKey();
+            int value=entry.getValue();
+            if(key==value){
+                maxLength=Math.max(maxLength,key);
+               
             }
         }
-
-        return -1; // No lucky integer found
+        return maxLength;
     }
 }
