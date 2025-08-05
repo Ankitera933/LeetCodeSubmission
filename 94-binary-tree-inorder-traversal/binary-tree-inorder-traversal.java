@@ -19,6 +19,8 @@ class Solution {
         inorder(root,ans);
         return ans;
     }
+    //recursive way
+
     public void inorder(TreeNode root, List<Integer>ans){
         if(root==null) return;
 
@@ -26,5 +28,6 @@ class Solution {
         ans.add(root.val);
         inorder(root.right,ans);
 
-    }
+    
+}
 }
