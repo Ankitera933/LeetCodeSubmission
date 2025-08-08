@@ -1,21 +1,21 @@
 class Solution {
     public int longestPalindrome(String s) {
-        HashSet<Character>set=new HashSet<>();
-        int pair=0;
-        for(int i=0;i<s.length();i++){
-            char ch=s.charAt(i);
-            if(set.contains(ch)){
-                set.remove(ch);
-                pair+=2;
+        int[] freq = new int[128]; // ASCII range
+        for (char ch : s.toCharArray()) {
+            freq[ch]++;
+        }
 
-            }
-            else{
-                set.add(ch);
+        int total = 0;
+        boolean hasOdd = false;
+
+        for (int count : freq) {
+            total += (count / 2) * 2; // take only pairs
+            if (count % 2 == 1) {
+                hasOdd = true;
             }
         }
-        if(!set.isEmpty()){
-            return pair+1;
-        }
-        return pair;
+
+        if (hasOdd) total += 1; // one odd char can be in the middle
+        return total;
     }
 }
