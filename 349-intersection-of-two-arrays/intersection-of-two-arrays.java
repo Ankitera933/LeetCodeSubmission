@@ -1,34 +1,29 @@
-import java.util.Arrays;
-import java.util.HashSet;
-
 class Solution {
     public int[] intersection(int[] nums1, int[] nums2) {
+        HashSet<Integer>set=new HashSet<>();
         Arrays.sort(nums1);
         Arrays.sort(nums2);
-        HashSet<Integer> set = new HashSet<>();
-        
-        int i = 0, j = 0;
-        
-        // Use two pointers to find common elements
-        while (i < nums1.length && j < nums2.length) {
-            if (nums1[i] < nums2[j]) {
-                i++;
-            } else if (nums1[i] > nums2[j]) {
-                j++;
-            } else {
-                set.add(nums1[i]);
-                i++;
-                j++;
+        int left=0;
+        int right=0;
+        while(left<nums1.length && right<nums2.length){
+            if(nums1[left]==nums2[right]){
+                set.add(nums1[left]);
+                left++;
+                right++;
+            }
+            else if(nums1[left]<nums2[right]){
+                left++;
+            }
+            else{
+                right++;
             }
         }
-
-        // Convert set to array
-        int[] result = new int[set.size()];
-        int index = 0;
-        for (int num : set) {
-            result[index++] = num;
+        int []arr=new int[set.size()];
+        int i=0;
+        for(int num:set){
+            arr[i++]=num;
         }
-        
-        return result;
+        return arr;
+
     }
 }
