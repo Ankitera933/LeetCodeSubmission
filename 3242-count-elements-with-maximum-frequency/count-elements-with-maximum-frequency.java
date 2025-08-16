@@ -10,11 +10,11 @@ class Solution {
             max=Math.max(freq,max);
         }
         int sum=0;
-        for(int freq:map.values()){
-            if(freq==max){
-            sum+=freq;
-            }
+       for (Map.Entry<Integer, Integer> entry : map.entrySet()){
+        if(entry.getValue()==max){
+            sum+=entry.getValue();
         }
+       }
         return sum;
 
     }
