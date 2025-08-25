@@ -1,13 +1,12 @@
 class Solution {
-    public int titleToNumber(String col) {
-        int l=col.length();
-        int result=0;
-        int p=0;
-        for(int i=l-1;i>=0;i--){
-            int temp=col.charAt(i)-64;
-            result+=Math.pow(26,p++)*temp;
+    public int titleToNumber(String columnTitle) {
+        if(columnTitle.length()==1)return columnTitle.charAt(0)-64;
+        int sum=0;
+        for(int i=0;i<columnTitle.length();i++){
+            char ch=columnTitle.charAt(i);
+           
+            sum=sum*26+(ch-'A'+1);
         }
-        return result;
+        return sum;
     }
-
 }
