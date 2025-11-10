@@ -1,20 +1,28 @@
 class Solution {
     public boolean isPalindrome(String s) {
-        String str1=s.replaceAll("[\\p{Punct}\\s]+","").toLowerCase();
-        int n=str1.length();
+        int left=0;
+        int right=s.length()-1;
 
-       int left=0;
-       int right=n-1;
-       while(left<=right){
-        char ch=str1.charAt(left);
-        char ch2=str1.charAt(right);
-        if(ch!=ch2){
-            return false;
+        while(left<right){
+            char ch=s.charAt(left);
+            char ch2=s.charAt(right);
+
+            if(!Character.isLetterOrDigit(ch)){
+                left++;
+                continue;
+            }
+            if(!Character.isLetterOrDigit(ch2)){
+                right--;
+                continue;
+            }
+
+            if(Character.toLowerCase(ch)!=Character.toLowerCase(ch2)){
+                return false;
+            }
+
+            left++;
+            right--;
         }
-        left++;
-        right--;
-       }
-       return true;
-
+        return true;
     }
 }
