@@ -4,10 +4,10 @@ class Solution {
    int i=0;
         while(i<nums.length){
            
-            if(nums[i]==1 && last!=-1){
-                if(i-last-1<k){
+            if(nums[i]==1 && last!=-1 && i-last-1<k){
+                
                     return false;
-                }
+                
             }
              if(nums[i]==1){
                 last=i;
