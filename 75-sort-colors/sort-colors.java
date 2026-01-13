@@ -8,11 +8,8 @@ class Solution {
                 int temp=nums[start];
                 nums[start]=nums[middle];
                 nums[middle]=temp;
-                start++;
                 middle++;
-
-                
-
+                start++;
             }
             else if(nums[middle]==2){
                 int temp=nums[end];
